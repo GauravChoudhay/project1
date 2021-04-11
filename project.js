@@ -1,7 +1,7 @@
 const puppeteer = require('puppeteer');
 const fs = require('fs');
-
-let shareName = "TATA STEEL";
+const prompt = require("prompt-sync")({sigint:true});
+let shareName = prompt("Which Share You Want to Track Sir : ");
 let id = "bibek57488@yncyjs.com";
 let pw = "123456789asdf";
 
@@ -10,7 +10,6 @@ let pw = "123456789asdf";
         headless: false,
         defaultViewport: null,
         args: ["--start-maximized"],
-        slowMo : 100,
     });
 
     let allPages = await browser.pages();
@@ -30,6 +29,11 @@ let pw = "123456789asdf";
     await tab.waitForSelector(".tv-header-search__input.js-header-search__input", { visible: true });
     await tab.type(".tv-header-search__input.js-header-search__input", "@"); // to active inputbox
     await tab.type(".tv-header-search__input.js-header-search__input", shareName);
+    for(let i=0;i<shareName.length;i++){
+        await backspace(tab);
+    }
+    await tab.keyboard.press("Backspace");
+    await tab.waitForTimeout(1000);
     await tab.keyboard.press("Enter");
     await tab.waitForSelector(".button-1iktpaT1", { visible: true });
     let aTag = await tab.$(".button-1iktpaT1");
@@ -56,10 +60,16 @@ async function chart(browser, completeFullChartLink) {
     divTags = await newTab.$$(".container-3Ywm3-oo");
     let rsiTag = divTags[0];
     await rsiTag.click();
-    await newTab.waitForTimeout(2000);
+    //await newTab.waitForTimeout(2000);
     await newTab.type(".input-3n5_2-hI", "Parabolic SAR");
     divTags = await newTab.$$(".container-3Ywm3-oo");
     let parSARTag = divTags[1];
     await parSARTag.click();
     await newTab.click(".close-2sL5JydP");
+    await newTab.waitForSelector(".item-3SbREAgE.isFirst-3SbREAgE");
+    await newTab.click(".item-3SbREAgE.isFirst-3SbREAgE");
+}
+
+async function backspace(tab){
+    await tab.keyboard.press("ArrowLeft");
 }
