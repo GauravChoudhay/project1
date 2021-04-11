@@ -7,3 +7,4 @@ by just entering the stock name.
 All the processes are being automated for the user and especially very helpful in intraday trading because timing is everything for them and no one wants to waste time in filling in details and selecting the right indicators.
 
 linkedIn post link -  video with running code(incase website add extra featurs and code won't able to get u to final output).
+https://www.linkedin.com/posts/gaurav-choudhary-544295178_pepcoding-education-automation-activity-6787013328964325376-taAq
