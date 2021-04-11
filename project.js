@@ -1,9 +1,9 @@
 const puppeteer = require('puppeteer');
 const fs = require('fs');
 const prompt = require("prompt-sync")({sigint:true});
+const lC  = require("./loginCredentials.js");
 let shareName = prompt("Which Share You Want to Track Sir : ");
-let id = "bibek57488@yncyjs.com";
-let pw = "123456789asdf";
+
 
 (async function () {
     let browser = await puppeteer.launch({
@@ -22,8 +22,8 @@ let pw = "123456789asdf";
     await tab.waitForSelector(".tv-signin-dialog__social.tv-signin-dialog__toggle-email.js-show-email", { visible: true })
     await tab.click(".tv-signin-dialog__social.tv-signin-dialog__toggle-email.js-show-email");
     await tab.waitForSelector('.tv-control-material-input.tv-signin-dialog__input.tv-control-material-input__control[autocomplete="username"]', { visible: true });
-    await tab.type('.tv-control-material-input.tv-signin-dialog__input.tv-control-material-input__control[autocomplete="username"]' , id);
-    await tab.type('.tv-control-material-input.tv-signin-dialog__input.tv-control-material-input__control[autocomplete="current-password"]' , pw);
+    await tab.type('.tv-control-material-input.tv-signin-dialog__input.tv-control-material-input__control[autocomplete="username"]' , lC.id);
+    await tab.type('.tv-control-material-input.tv-signin-dialog__input.tv-control-material-input__control[autocomplete="current-password"]' , lC.pw);
     await tab.click(".tv-button__loader");
 
     await tab.waitForSelector(".tv-header-search__input.js-header-search__input", { visible: true });
